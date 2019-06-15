@@ -26,6 +26,7 @@ public class Trabalho {
     @NotBlank(message = "Insira uma descrição")
     private String descricao;
 
+    @NotBlank(message = "Insira uma URL")
     private String url;
 
     @NotNull(message = "Selecione uma área de conhecimento")
@@ -85,6 +86,10 @@ public class Trabalho {
         this.revisao = revisao;
     }
 
-    
+    @Override
+    public String toString() {
+        return "Trabalho: id=" + this.id + " _titulo=" + titulo + " _descricao=" + descricao + " _areaConhecimento=" + areaConhecimento;
+    }
+
     
 }
