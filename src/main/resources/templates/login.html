@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <h1>Login do Avaliador</h1>
+
+    <form th:action="@{login.html}" th:object="${avaliador}" method="POST">
+        <table>
+            <tr>
+                <td><label>E-mail: <input type="text" th:field="*{email}" /></label></td>
+                <td><strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong></td>
+            </tr>
+            <tr>
+                <td><label>Código de Acesso: <input type="number" th:field="*{codigoAcesso}"/></label></td>
+                <td><strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong></td>
+            </tr>
+            <tr>
+                <td><input type="submit"/></td>
+                <td><input type="reset"/></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>
