@@ -1,13 +1,13 @@
-package br.ufjf.dcc193.trab2.Repository;
+package br.ufjf.dcc193.trab2.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.ufjf.dcc193.trab2.Model.Trabalho;
+import br.ufjf.dcc193.trab2.model.Trabalho;
 
 /**
  * TrabalhoRepository
  */
-public interface TrabalhoRepository extends JpaRepository<Long, Trabalho>{
+public interface TrabalhoRepository extends JpaRepository<Trabalho, Long>{
 
     
 }

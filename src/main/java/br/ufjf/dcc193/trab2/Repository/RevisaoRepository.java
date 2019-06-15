@@ -1,13 +1,13 @@
-package br.ufjf.dcc193.trab2.Repository;
+package br.ufjf.dcc193.trab2.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import br.ufjf.dcc193.trab2.Model.Revisao;
+import br.ufjf.dcc193.trab2.model.Revisao;
 
 /**
  * RevisaoRepository
  */
-public interface RevisaoRepository extends JpaRepository<Long, Revisao>{
+public interface RevisaoRepository extends JpaRepository<Revisao, Long>{
 
     
 }
