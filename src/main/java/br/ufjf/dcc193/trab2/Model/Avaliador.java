@@ -11,8 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-import org.apache.logging.log4j.message.Message;
 
 /**
  * Avaliador
@@ -24,23 +24,29 @@ public class Avaliador {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
-    @NotBlank(message = "Insira um nome")
+    //@NotBlank(message = "Insira um nome")
     private String nome;
     
 
+    @NotBlank(message = "O campo não pode estar vazio")
     @Column(unique=true)
     @Email(message = "Insira um e-mail válido")
     private String email;
 
+    @NotNull(message = "O campo não pode estar vazio")
     private Long codigoAcesso;
 
-    private boolean[] areasConhecimento;
+    private boolean areaExatas;
+
+    private boolean areaHumanas;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Revisao> listRevisao;
 
     public Avaliador() {
     }
+
+ 
 
     public Long getId() {
         return id;
@@ -74,14 +80,6 @@ public class Avaliador {
         this.codigoAcesso = codigoAcesso;
     }
 
-    public boolean[] getAreasConhecimento() {
-        return areasConhecimento;
-    }
-
-    public void setAreasConhecimento(boolean[] areasConhecimento) {
-        this.areasConhecimento = areasConhecimento;
-    }
-
     public List<Revisao> getListRevisao() {
         return listRevisao;
     }
@@ -89,6 +87,30 @@ public class Avaliador {
     public void setListRevisao(List<Revisao> listRevisao) {
         this.listRevisao = listRevisao;
     }
+
+    public boolean isAreaExatas() {
+        return areaExatas;
+    }
+
+    public void setAreaExatas(boolean areaExatas) {
+        this.areaExatas = areaExatas;
+    }
+
+    public boolean isAreaHumanas() {
+        return areaHumanas;
+    }
+
+    public void setAreaHumanas(boolean areaHumanas) {
+        this.areaHumanas = areaHumanas;
+    }
+
+    @Override
+    public String toString() {
+        return "Avaliador [areaExatas=" + areaExatas + ", areaHumanas=" + areaHumanas + ", codigoAcesso=" + codigoAcesso
+                + ", email=" + email + ", id=" + id + ", listRevisao=" + listRevisao + ", nome=" + nome + "]";
+    }
+
+    
 
 
     
