@@ -1,20 +1,37 @@
-package br.ufjf.dcc193.trab2.Model;
+package br.ufjf.dcc193.trab2.model;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * Trabalho
  */
+@Entity
 public class Trabalho {
 
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @NotBlank(message = "Insira um título")
     private String titulo;
 
+    @NotBlank(message = "Insira uma descrição")
     private String descricao;
 
     private String url;
 
+    @NotNull(message = "Selecione uma área de conhecimento")
     private int areaConhecimento;
 
+    @OneToOne()
     private Revisao revisao;
 
     public Trabalho() {

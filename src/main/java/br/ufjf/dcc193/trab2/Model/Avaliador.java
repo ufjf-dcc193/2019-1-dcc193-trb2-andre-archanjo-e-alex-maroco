@@ -1,22 +1,42 @@
-package br.ufjf.dcc193.trab2.Model;
+package br.ufjf.dcc193.trab2.model;
 
 import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
+import org.apache.logging.log4j.message.Message;
 
 /**
  * Avaliador
  */
+@Entity
 public class Avaliador {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
+    @NotBlank(message = "Insira um nome")
     private String nome;
+    
 
+    @Column(unique=true)
+    @Email(message = "Insira um e-mail válido")
     private String email;
 
     private Long codigoAcesso;
 
     private boolean[] areasConhecimento;
 
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Revisao> listRevisao;
 
     public Avaliador() {
