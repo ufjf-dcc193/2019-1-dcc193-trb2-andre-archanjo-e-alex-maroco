@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro do Avaliador</title>
+</head>
+
+<body>
+
+    <h1>Cadastro do Avaliador</h1>
+
+    <form th:action="@{cadastroavaliador.html}" th:object="${avaliador}" method="POST">
+        <table>
+            <tr>
+                        <td><label>Nome: <input type="text" th:field="*{nome}" /></label></td>
+                        <td><strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong></td>
+                    </tr>
+            <tr>
+                <td><label>E-mail: <input type="text" th:field="*{email}" /></label></td>
+                <td><strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong></td>
+            </tr>
+            <tr>
+                <td><label>Código de Acesso: <input type="number" th:field="*{codigoAcesso}"/></label></td>
+                <td><strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong></td>
+            </tr>
+            <tr>
+                    <td><label>Exatas<input type="checkbox" name="areaExatas" th:checked="${avaliador.areaExatas}" /></label></td>
+                    <td><label>Humanas<input type="checkbox" name="areaHumanas" th:checked="${avaliador.areaHumanas}" /></label></td>
+            </tr>
+            <tr>
+                <td><input type="submit"/></td>
+                <td><input type="reset"/></td>
+            </tr>
+        </table>
+    </form>
+
+</body>
+</html>
