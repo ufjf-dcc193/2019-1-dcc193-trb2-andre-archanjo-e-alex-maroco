@@ -42,7 +42,7 @@ public class TrabalhoController {
             //System.err.println(trab.toString());
             tRepo.save(trab);
             System.err.println(tRepo.findAll());
-            mv.setViewName("redirect:index.html");
+            mv.setViewName("redirect:/index.html");
             return mv;
     }
     
