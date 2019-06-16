@@ -28,7 +28,7 @@ public class TrabalhoController {
         return mv;
     }
 
-    @PostMapping("/CadastroTrabalho.html")
+    @PostMapping("/trabalho/cadastro.html")
     public ModelAndView cadastroTrabalho(@Valid Trabalho trab, BindingResult binding) {
         ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
@@ -36,7 +36,7 @@ public class TrabalhoController {
                 mv.addObject("trabalho", trab);
                 return mv;
             }
-            System.err.println(trab.toString());
+            //System.err.println(trab.toString());
             tRepo.save(trab);
             System.err.println(tRepo.findAll());
             mv.setViewName("redirect:index.html");
