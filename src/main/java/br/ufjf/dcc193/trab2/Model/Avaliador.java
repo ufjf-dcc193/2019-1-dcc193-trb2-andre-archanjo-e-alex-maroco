@@ -110,8 +110,14 @@ public class Avaliador {
                 + ", email=" + email + ", id=" + id + ", listRevisao=" + listRevisao + ", nome=" + nome + "]";
     }
 
+    public void addRevisao(Revisao revisao){
+        this.listRevisao.add(revisao);
+    }
+
+    public void removeRevisao(Revisao revisao){
+        this.listRevisao.remove(revisao);
+    }
+
     
-
-
     
 }

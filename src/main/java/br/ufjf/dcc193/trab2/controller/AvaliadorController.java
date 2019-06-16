@@ -99,7 +99,13 @@ public class AvaliadorController {
                 mv.addObject("avaliador", avaliador);
                 return mv;
             }
-            aRepo.save(avaliador);
+            Avaliador av = aRepo.getOne(avaliador.getId());
+            av.setNome(avaliador.getNome());
+            av.setEmail(avaliador.getEmail());
+            av.setCodigoAcesso(avaliador.getCodigoAcesso());
+            av.setAreaExatas(avaliador.isAreaExatas());
+            av.setAreaHumanas(avaliador.isAreaHumanas());
+            aRepo.save(av);
             mv.setViewName("redirect:/avaliador/listar.html");
             return mv;
     }
