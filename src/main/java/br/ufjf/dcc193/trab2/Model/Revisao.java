@@ -24,6 +24,8 @@ public class Revisao {
 
     private String descricao;
 
+    @Min(value = 0, message = "O valor mínimo é 0")
+    @Max(value = 4, message = "O valor máximo é 4")
     private int status;
 
     public Revisao() {
@@ -60,7 +62,5 @@ public class Revisao {
     public void setStatus(int status) {
         this.status = status;
     }
-
-    
 
 }
