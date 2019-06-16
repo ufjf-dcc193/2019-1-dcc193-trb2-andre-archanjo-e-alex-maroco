@@ -1,5 +1,7 @@
 package br.ufjf.dcc193.trab2.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.ufjf.dcc193.trab2.model.Avaliador;
@@ -40,14 +43,14 @@ public class AvaliadorController {
             Avaliador a = aRepo.findOneByEmailAndCodigoAcesso(avaliador.getEmail(), avaliador.getCodigoAcesso());
             System.err.println(a);
             if(a != null){
-                mv.setViewName("redirect:CadastroAvaliador.html");
+                mv.setViewName("redirect:index.html");
                 return mv;
             }
-            mv.setViewName("redirect:index.html");
+            mv.setViewName("redirect:login.html");
             return mv;
     }
 
-    @GetMapping(value={"/CadastroAvaliador.html" })
+    @GetMapping(value={"/avaliador/cadastro.html" })
     public ModelAndView cadastroAvaliador() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("avaliador", new Avaliador());
@@ -55,7 +58,7 @@ public class AvaliadorController {
         return mv;
     }
 
-    @PostMapping(value="/CadastroAvaliador.html")
+    @PostMapping(value="/avaliador/cadastro.html")
     public ModelAndView cadastroAvaliador(@Valid Avaliador avaliador, BindingResult binding){
             ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
@@ -63,10 +66,50 @@ public class AvaliadorController {
                 mv.addObject("avaliador", avaliador);
                 return mv;
             }
-            System.err.println(avaliador.toString());
+            //System.err.println(avaliador.toString());
             aRepo.save(avaliador);
             System.err.println(aRepo.findAll());
-            mv.setViewName("redirect:index.html");
+            mv.setViewName("redirect:/index.html");
             return mv;
     }
+
+    @GetMapping(value={"/avaliador/listar.html" })
+    public ModelAndView listarTodos() {
+        ModelAndView mv = new ModelAndView();
+        List<Avaliador> av = aRepo.findAll();
+        mv.addObject("avaliadores", av);
+        mv.setViewName("list-avaliadores");
+        return mv;
+    }
+
+    @GetMapping(value={"/avaliador/editar.html" })
+    public ModelAndView editarAvaliador(@RequestParam Long id) {
+        ModelAndView mv = new ModelAndView();
+        Avaliador av = aRepo.findById(id).get();
+        mv.addObject("avaliador", av);
+        mv.setViewName("form-edit-avaliador");
+        return mv;
+    }
+
+    @PostMapping(value={"/avaliador/editar.html" })
+    public ModelAndView editarAvaliador(@Valid Avaliador avaliador, BindingResult binding) {
+        ModelAndView mv = new ModelAndView();
+            if(binding.hasErrors()){
+                mv.setViewName("form-edit-avaliador");
+                mv.addObject("avaliador", avaliador);
+                return mv;
+            }
+            aRepo.save(avaliador);
+            mv.setViewName("redirect:/avaliador/listar.html");
+            return mv;
+    }
+
+    @GetMapping(value={"/avaliador/excluir.html" })
+    public ModelAndView excluirAvaliador(@RequestParam Long id) {
+        ModelAndView mv = new ModelAndView();
+        aRepo.deleteById(id);
+        mv.setViewName("redirect:/avaliador/listar.html");
+        return mv;
+    }
+
 }
