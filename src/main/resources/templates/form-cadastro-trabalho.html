@@ -10,7 +10,7 @@
 
     <h1>Cadastro de Trabalhos</h1>
 
-    <form th:action="@{CadastroTrabalho.html}" th:object="${trabalho}" method="POST">
+    <form th:action="@{/trabalho/cadastro.html}" th:object="${trabalho}" method="POST">
         <table>
             <tr>
                 <td><label>Título: <input type="text" th:field="*{titulo}" /></label></td>
