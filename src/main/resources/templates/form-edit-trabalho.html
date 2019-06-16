@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar dados do Trabalho</title>
+</head>
+
+<body>
+
+    <h1>Editar dados do Trabalho</h1>
+
+    <form th:action="@{/trabalho/editar.html(id=${trabalho.id})}" th:object="${trabalho}" method="POST">
+        <table>
+            <tr>
+                <td><label>Título: <input type="text" th:field="*{titulo}" /></label></td>
+                <td><strong th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></strong></td>
+                    </tr>
+            <tr>
+                <td><label>Descrição: <input type="text" th:field="*{descricao}" /></label></td>
+                <td><strong th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></strong></td>
+            </tr>
+            <tr>
+                <td><label>URL: <input type="text" th:field="*{url}" /></label></td>
+                <td><strong th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></strong></td>
+            </tr>
+            <tr>
+                <td>Área de conhecimento: </td>
+            </tr>
+            <tr>
+                <td>
+                    <ul>
+                        <li> <label>Exatas<input type="radio" th:field="*{areaConhecimento}" th:value="0" /></label> </li>
+                        <li> <label>Humanas<input type="radio" th:field="*{areaConhecimento}" th:value="1" /></label> </li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit"/></td>
+                <td><input type="reset"/></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
