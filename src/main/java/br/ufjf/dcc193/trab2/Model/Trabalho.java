@@ -32,7 +32,7 @@ public class Trabalho {
     @NotNull(message = "Selecione uma área de conhecimento")
     private int areaConhecimento;
 
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Revisao revisao;
 
     public Trabalho() {
