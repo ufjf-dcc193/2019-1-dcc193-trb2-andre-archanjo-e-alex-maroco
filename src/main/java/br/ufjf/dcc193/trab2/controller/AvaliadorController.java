@@ -33,7 +33,7 @@ public class AvaliadorController {
     }
 
     @PostMapping(value="/login.html")
-    public ModelAndView criar(@Valid Avaliador avaliador, BindingResult binding){
+    public ModelAndView login(@Valid Avaliador avaliador, BindingResult binding){
             ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
                 mv.setViewName("login");
@@ -43,7 +43,8 @@ public class AvaliadorController {
             Avaliador a = aRepo.findOneByEmailAndCodigoAcesso(avaliador.getEmail(), avaliador.getCodigoAcesso());
             System.err.println(a);
             if(a != null){
-                mv.setViewName("redirect:index.html");
+                mv.setViewName("avaliador-logado.html");
+                mv.addObject("avaliador", a);
                 return mv;
             }
             mv.setViewName("redirect:login.html");
