@@ -1,10 +1,13 @@
 package br.ufjf.dcc193.trab2.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -32,8 +35,8 @@ public class Trabalho {
     @NotNull(message = "Selecione uma área de conhecimento")
     private int areaConhecimento;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    private Revisao revisao;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Revisao> listRevisao;
 
     public Trabalho() {
     }
@@ -78,18 +81,29 @@ public class Trabalho {
         this.areaConhecimento = areaConhecimento;
     }
 
-    public Revisao getRevisao() {
-        return revisao;
+    public List<Revisao> getListRevisao() {
+        return listRevisao;
     }
 
-    public void setRevisao(Revisao revisao) {
-        this.revisao = revisao;
+    public void setListRevisao(List<Revisao> listRevisao) {
+        this.listRevisao = listRevisao;
+    }
+
+    public void addRevisao(Revisao revisao){
+        this.listRevisao.add(revisao);
+    }
+
+    public void removeRevisao(Revisao revisao){
+        this.listRevisao.remove(revisao);
     }
 
     @Override
     public String toString() {
-        return "Trabalho: id=" + this.id + " _titulo=" + titulo + " _descricao=" + descricao + " _areaConhecimento=" + areaConhecimento;
+        return "Trabalho [areaConhecimento=" + areaConhecimento + ", descricao=" + descricao + ", id=" + id
+                + ", listRevisao=" + listRevisao + ", titulo=" + titulo + ", url=" + url + "]";
     }
+
+    
 
     
 }
