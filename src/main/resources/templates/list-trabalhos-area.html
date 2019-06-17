@@ -8,7 +8,12 @@
 
 <body>
 
-    <h1>Trabalhos registrados: </h1>
+    <h1>Trabalhos registrados na área 
+        <td th:switch="${area}">
+            <span th:case="'0'">Exatas</span>
+            <span th:case="'1'">Humanas</span>
+        </td>
+    </h1>
 
     <table border="1">
         <tr> 
@@ -22,12 +27,10 @@
             <td th:text="${trabalho.id}">...</td>
             <td th:text="${trabalho.titulo}">...</td>
             <td th:text="${trabalho.descricao}">...</td>
-
             <td th:switch="${trabalho.areaConhecimento}">
                 <span th:case="'0'">Exatas</span>
                 <span th:case="'1'">Humanas</span>
             </td>
-
             <td><a th:href="@{/trabalho/editar.html(id=${trabalho.id})}"><button>Editar</button></a></td>
             <td><a th:href="@{/trabalho/excluir.html(id=${trabalho.id})}"><button>Excluir</button></a></td>
         </tr>

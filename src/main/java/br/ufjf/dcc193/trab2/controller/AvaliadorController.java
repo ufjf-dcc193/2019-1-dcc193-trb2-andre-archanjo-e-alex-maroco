@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -101,11 +102,13 @@ public class AvaliadorController {
                 return mv;
             }
             Avaliador av = aRepo.getOne(avaliador.getId());
-            av.setNome(avaliador.getNome());
-            av.setEmail(avaliador.getEmail());
-            av.setCodigoAcesso(avaliador.getCodigoAcesso());
-            av.setAreaExatas(avaliador.isAreaExatas());
-            av.setAreaHumanas(avaliador.isAreaHumanas());
+            String[] ignorar = {"id", "listRevisao"};
+            BeanUtils.copyProperties(avaliador, av, ignorar);
+            // av.setNome(avaliador.getNome());
+            // av.setEmail(avaliador.getEmail());
+            // av.setCodigoAcesso(avaliador.getCodigoAcesso());
+            // av.setAreaExatas(avaliador.isAreaExatas());
+            // av.setAreaHumanas(avaliador.isAreaHumanas());
             aRepo.save(av);
             mv.setViewName("redirect:/avaliador/listar.html");
             return mv;
