@@ -12,16 +12,24 @@
 
     <table border="1">
         <tr> 
+            <th>Id</th>
             <th>Nome</th>
             <th>Email</th>
+            <th>Áreas</th>
             <th colspan="2">Ações</th>
         </tr>
         <tr th:each="avaliador : ${avaliadores}">
+            <td th:text="${avaliador.id}">...</td>
             <td th:text="${avaliador.nome}">...</td>
             <td th:text="${avaliador.email}">...</td>
+            <td>
+                <span th:if="${avaliador.areaExatas}">Exatas;</span>
+                <span th:if="${avaliador.areaHumanas}">Humanas;</span>
+            </td>
             <td><a th:href="@{/avaliador/editar.html(id=${avaliador.id})}"><button>Editar</button></a></td>
             <td><a th:href="@{/avaliador/excluir.html(id=${avaliador.id})}"><button>Excluir</button></a></td>
         </tr>
     </table>
+    <p><button><a th:href="@{/index.html}">Voltar</a></button></p>
 </body>
 </html>

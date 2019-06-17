@@ -12,16 +12,26 @@
 
     <table border="1">
         <tr> 
+            <th>Id</th>
             <th>Título</th>
             <th>Descrição</th>
+            <th>Área</th>
             <th colspan="2">Ações</th>
         </tr>
         <tr th:each="trabalho : ${trabalhos}">
+            <td th:text="${trabalho.id}">...</td>
             <td th:text="${trabalho.titulo}">...</td>
             <td th:text="${trabalho.descricao}">...</td>
+
+            <td th:switch="${trabalho.areaConhecimento}">
+                <span th:case="'0'">Exatas</span>
+                <span th:case="'1'">Humanas</span>
+            </td>
+
             <td><a th:href="@{/trabalho/editar.html(id=${trabalho.id})}"><button>Editar</button></a></td>
             <td><a th:href="@{/trabalho/excluir.html(id=${trabalho.id})}"><button>Excluir</button></a></td>
         </tr>
     </table>
+    <p><button><a th:href="@{/index.html}">Voltar</a></button></p>
 </body>
 </html>
