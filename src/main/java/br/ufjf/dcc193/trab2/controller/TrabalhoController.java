@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,12 +20,13 @@ import br.ufjf.dcc193.trab2.repository.TrabalhoRepository;
 
 
 @Controller
+@RequestMapping("/trabalho")
 public class TrabalhoController {
 
     @Autowired
     TrabalhoRepository tRepo;
 
-    @GetMapping("/trabalho/cadastro.html")
+    @GetMapping("/cadastro.html")
     public ModelAndView cadastroTrabalho() {
         ModelAndView mv = new ModelAndView();
         mv.addObject("trabalho", new Trabalho());
@@ -31,7 +34,7 @@ public class TrabalhoController {
         return mv;
     }
 
-    @PostMapping("/trabalho/cadastro.html")
+    @PostMapping("/cadastro.html")
     public ModelAndView cadastroTrabalho(@Valid Trabalho trab, BindingResult binding) {
         ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
@@ -42,11 +45,11 @@ public class TrabalhoController {
             //System.err.println(trab.toString());
             tRepo.save(trab);
             System.err.println(tRepo.findAll());
-            mv.setViewName("redirect:index.html");
+            mv.setViewName("redirect:/index.html");
             return mv;
     }
     
-    @GetMapping(value={"/trabalho/listar.html" })
+    @GetMapping(value={"/listar.html" })
     public ModelAndView listarTodos() {
         ModelAndView mv = new ModelAndView();
         List<Trabalho> tr = tRepo.findAll();
@@ -55,7 +58,7 @@ public class TrabalhoController {
         return mv;
     }
 
-    @GetMapping(value={"/trabalho/editar.html" })
+    @GetMapping(value={"/editar.html" })
     public ModelAndView editarTrabalho(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
         Trabalho tr = tRepo.findById(id).get();
@@ -64,7 +67,7 @@ public class TrabalhoController {
         return mv;
     }
 
-    @PostMapping(value={"/trabalho/editar.html" })
+    @PostMapping(value={"/editar.html" })
     public ModelAndView editarTrabalho(@Valid Trabalho trabalho, BindingResult binding) {
         ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
@@ -73,16 +76,18 @@ public class TrabalhoController {
                 return mv;
             }
             Trabalho tr = tRepo.getOne(trabalho.getId());
-            tr.setTitulo(trabalho.getTitulo());
-            tr.setDescricao(trabalho.getDescricao());
-            tr.setUrl(trabalho.getUrl());
-            tr.setAreaConhecimento(trabalho.getAreaConhecimento());
+            String[] ignorar = {"id", "revisao"};
+            BeanUtils.copyProperties(trabalho, tr, ignorar);
+            // tr.setTitulo(trabalho.getTitulo());
+            // tr.setDescricao(trabalho.getDescricao());
+            // tr.setUrl(trabalho.getUrl());
+            // tr.setAreaConhecimento(trabalho.getAreaConhecimento());
             tRepo.save(tr);
             mv.setViewName("redirect:/trabalho/listar.html");
             return mv;
     }
 
-    @GetMapping(value={"/trabalho/excluir.html" })
+    @GetMapping(value={"/excluir.html" })
     public ModelAndView excluirTrabalho(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
         tRepo.deleteById(id);
