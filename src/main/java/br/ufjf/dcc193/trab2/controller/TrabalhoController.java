@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ufjf.dcc193.trab2.model.Trabalho;
 import br.ufjf.dcc193.trab2.repository.TrabalhoRepository;
+import br.ufjf.dcc193.trab2.service.LoginService;
 
 
 
@@ -25,6 +26,9 @@ public class TrabalhoController {
 
     @Autowired
     TrabalhoRepository tRepo;
+
+    @Autowired
+    private LoginService ls;
 
     @GetMapping("/cadastro.html")
     public ModelAndView cadastroTrabalho() {
@@ -54,6 +58,11 @@ public class TrabalhoController {
         ModelAndView mv = new ModelAndView();
         List<Trabalho> tr = tRepo.findAll();
         mv.addObject("trabalhos", tr);
+        if(ls.getUser() != null) {
+            mv.addObject("username", ls.getUser().getNome());
+        } else {
+            mv.addObject("username", "Sem user");
+        }
         mv.setViewName("list-trabalhos");
         return mv;
     }

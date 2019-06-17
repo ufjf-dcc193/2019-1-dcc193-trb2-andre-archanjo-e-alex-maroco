@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.ufjf.dcc193.trab2.model.Avaliador;
 import br.ufjf.dcc193.trab2.repository.AvaliadorRepository;
+import br.ufjf.dcc193.trab2.service.LoginService;
 
 /**
  * AvaliadorController
@@ -24,6 +25,9 @@ public class AvaliadorController {
 
     @Autowired
     AvaliadorRepository aRepo;
+
+    @Autowired
+    private LoginService ls;
 
     @GetMapping(value={"/login.html" })
     public ModelAndView login() {
@@ -44,6 +48,7 @@ public class AvaliadorController {
             Avaliador a = aRepo.findOneByEmailAndCodigoAcesso(avaliador.getEmail(), avaliador.getCodigoAcesso());
             System.err.println(a);
             if(a != null){
+                ls.login(a);
                 mv.setViewName("redirect:index.html");
                 return mv;
             }
