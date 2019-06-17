@@ -49,11 +49,20 @@ public class AvaliadorController {
             System.err.println(a);
             if(a != null){
                 ls.login(a);
-                mv.setViewName("redirect:index.html");
+                mv.setViewName("redirect:/avaliador/home.html");
                 return mv;
             }
             mv.setViewName("redirect:login.html");
             return mv;
+    }
+
+    @GetMapping(value={"/avaliador/home.html"})
+    public ModelAndView home() {
+        ModelAndView mv = new ModelAndView();
+        Avaliador a = ls.getUser();
+        mv.addObject("avaliador", a);
+        mv.setViewName("avaliador-logado");
+        return mv;
     }
 
     @GetMapping(value={"/avaliador/cadastro.html" })
