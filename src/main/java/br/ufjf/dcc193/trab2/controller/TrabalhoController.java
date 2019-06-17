@@ -108,6 +108,9 @@ public class TrabalhoController {
     public ModelAndView listarArea(@RequestParam int area) {
         ModelAndView mv = new ModelAndView();
         List<Trabalho> tr = tRepo.findAllByAreaConhecimento(area);
+        for (Trabalho t : tr) {
+            System.err.println(t.toString());
+        }
         mv.addObject("trabalhos", tr);
         mv.addObject("area", area);
         mv.setViewName("list-trabalhos-area");

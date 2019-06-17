@@ -8,9 +8,9 @@
 
 <body>
 
-    <h1>Cadastro do Avaliador</h1>
+    <h1>Cadastro da Revisão</h1>
 
-    <form th:action="@{/avaliador/cadastro.html}" th:object="${revisao}" method="POST">
+    <form th:action="@{/revisao/cadastrar.html(idTrabalho=${idTrabalho})}" th:object="${revisao}" method="POST">
         <table>
             <tr>
                 <td><label>Descrição: <input type="text" th:field="*{descricao}" /></label></td>
@@ -20,7 +20,6 @@
                 <td><strong th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}"></strong></td>
             </tr>
             <tr>
-                <input type="hidden" th:object="${trabalho}"/>
                 <td><input type="submit"/></td>
                 <td><input type="reset"/></td>
             </tr>

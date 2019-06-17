@@ -63,4 +63,11 @@ public class Revisao {
         this.status = status;
     }
 
+    @Override
+    public String toString() {
+        return "Revisao [descricao=" + descricao + ", id=" + id + ", nota=" + nota + ", status=" + status + "]";
+    }
+
+    
+
 }

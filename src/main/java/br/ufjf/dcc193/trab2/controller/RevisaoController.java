@@ -27,29 +27,30 @@ public class RevisaoController {
     @Autowired
     RevisaoRepository rRepo;
 
-    @GetMapping("/cadastro.html")
+    @GetMapping("/cadastrar.html")
     public ModelAndView cadastroRevisao(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
-        Trabalho tr = tRepo.findById(id).get();
         mv.addObject("revisao", new Revisao());
-        mv.addObject("trabalho", tr);
+        System.err.println(id);
+        mv.addObject("idTrabalho", id);
         mv.setViewName("form-cadastro-revisao");
         return mv;
     }
 
-    @PostMapping(value={"/cadastro.html" })
-    public ModelAndView editarTrabalho(@Valid Revisao revisao, Trabalho trabalho, BindingResult binding) {
+    @PostMapping(value={"/cadastrar.html" })
+    public ModelAndView cadastroRevisao(@Valid Revisao revisao, @RequestParam Long idTrabalho, BindingResult binding) {
         ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
                 mv.setViewName("form-cadastro-revisao");
-                mv.addObject("trabalho", trabalho);
+                mv.addObject("revisao", revisao);
+                mv.addObject("idTrabalho", idTrabalho);
                 return mv;
             }
             rRepo.save(revisao);
-            Trabalho tr = tRepo.getOne(trabalho.getId());
+            System.err.println(revisao.toString());
+            Trabalho tr = tRepo.findById(idTrabalho).get();
+            System.err.println(tr.toString());
             tr.addRevisao(revisao);
-            String[] ignorar = {"id", "revisao"};
-            BeanUtils.copyProperties(trabalho, tr, ignorar);
             // tr.setTitulo(trabalho.getTitulo());
             // tr.setDescricao(trabalho.getDescricao());
             // tr.setUrl(trabalho.getUrl());
