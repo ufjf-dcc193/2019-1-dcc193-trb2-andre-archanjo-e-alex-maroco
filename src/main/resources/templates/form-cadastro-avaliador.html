@@ -13,9 +13,8 @@
     <form th:action="@{/avaliador/cadastro.html}" th:object="${avaliador}" method="POST">
         <table>
             <tr>
-                        <td><label>Nome: <input type="text" th:field="*{nome}" /></label></td>
-                        <td><strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong></td>
-                    </tr>
+                <td><label>Nome: <input type="text" th:field="*{nome}" /></label></td>
+                <td><strong th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></strong></td>
             <tr>
                 <td><label>E-mail: <input type="text" th:field="*{email}" /></label></td>
                 <td><strong th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></strong></td>
@@ -25,8 +24,8 @@
                 <td><strong th:if="${#fields.hasErrors('codigoAcesso')}" th:errors="*{codigoAcesso}"></strong></td>
             </tr>
             <tr>
-                    <td><label>Exatas<input type="checkbox" name="areaExatas" th:checked="${avaliador.areaExatas}" /></label></td>
-                    <td><label>Humanas<input type="checkbox" name="areaHumanas" th:checked="${avaliador.areaHumanas}" /></label></td>
+                <td><label>Exatas<input type="checkbox" name="areaExatas" th:checked="${avaliador.areaExatas}" /></label></td>
+                <td><label>Humanas<input type="checkbox" name="areaHumanas" th:checked="${avaliador.areaHumanas}" /></label></td>
             </tr>
             <tr>
                 <td><input type="submit"/></td>

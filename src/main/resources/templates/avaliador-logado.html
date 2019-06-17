@@ -7,6 +7,10 @@
 <body>
 
     <h1>Bem vindo <span th:text="${avaliador.nome}">Seu Nome Aqui</span>!</h1>
+
+    <span th:if="${avaliador.areaHumanas}">Área de conhecimento: Humanas</span>
+    <span th:if="${avaliador.areaExatas}">Área de conhecimento: Exatas</span>
+
     <ul>
         <li><a th:href="@{/index.html}">Sair</a></li>
     </ul>
