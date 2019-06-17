@@ -48,13 +48,8 @@ public class AvaliadorController {
             Avaliador a = aRepo.findOneByEmailAndCodigoAcesso(avaliador.getEmail(), avaliador.getCodigoAcesso());
             System.err.println(a);
             if(a != null){
-<<<<<<< HEAD
                 ls.login(a);
                 mv.setViewName("redirect:index.html");
-=======
-                mv.setViewName("avaliador-logado.html");
-                mv.addObject("avaliador", a);
->>>>>>> 9c22964e0d8f114e6cd4ab1983f88316de7f15e7
                 return mv;
             }
             mv.setViewName("redirect:login.html");
