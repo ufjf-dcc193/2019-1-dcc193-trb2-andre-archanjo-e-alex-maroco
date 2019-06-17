@@ -95,19 +95,14 @@ public class TrabalhoController {
         return mv;
     }
     
-    /*@GetMapping({"index.html"})
-    public ModelAndView homeGet(){
+    @GetMapping(value={"/listarArea.html"})
+    public ModelAndView listarArea(@RequestParam int area) {
         ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
+        List<Trabalho> tr = tRepo.findAllByAreaConhecimento(area);
+        mv.addObject("trabalhos", tr);
+        mv.addObject("area", area);
+        mv.setViewName("list-trabalhos-area");
         return mv;
     }
-
-    @PostMapping({"index.html"})
-    public ModelAndView homePost(@RequestParam Avaliador avaliador){
-        ModelAndView mv = new ModelAndView();
-        mv.setViewName("index");
-        mv.addObject("avaliador", avaliador);
-        return mv;
-    }*/
     
 }
