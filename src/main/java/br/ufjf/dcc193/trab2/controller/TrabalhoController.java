@@ -53,7 +53,7 @@ public class TrabalhoController {
             return mv;
     }
     
-    @GetMapping(value={"/listar.html" })
+    @GetMapping(value={"/listar.html"})
     public ModelAndView listarTodos() {
         ModelAndView mv = new ModelAndView();
         List<Trabalho> tr = tRepo.findAll();
@@ -61,7 +61,7 @@ public class TrabalhoController {
         if(ls.getUser() != null) {
             mv.addObject("username", ls.getUser().getNome());
         } else {
-            mv.addObject("username", "Sem user");
+            mv.addObject("username", "-");
         }
         mv.setViewName("list-trabalhos");
         return mv;
@@ -104,7 +104,7 @@ public class TrabalhoController {
         return mv;
     }
     
-    @GetMapping(value={"/listarArea.html"})
+    @GetMapping(value={"/listar.html"}, params = {"area"})
     public ModelAndView listarArea(@RequestParam int area) {
         ModelAndView mv = new ModelAndView();
         List<Trabalho> tr = tRepo.findAllByAreaConhecimento(area);
