@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trabalho 2</title>
+</head>
+<body>
+
+    <h1>Bem vindo <span th:text="${avaliador.nome}">Seu Nome Aqui</span>!</h1>
+    <h2> Suas áreas de conhecimento: </h2>
+    <ul>
+    <li th:if="${avaliador.areaHumanas}">Humanas <a th:href="@{/trabalho/listar.html(area=${0})}"><button>Listar</button></a></li>
+    <li th:if="${avaliador.areaExatas}">Exatas <a th:href="@{/trabalho/listar.html(area=${1})}"><button>Listar</button></a></li>
+    </ul>
+    <p>
+        <button><a th:href="@{/logout.html}">Sair</a></button>
+        <button><a th:href="@{/index.html}">Voltar ao index</a></button>
+    </p>
+
+</body>
+</html>
