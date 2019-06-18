@@ -8,8 +8,8 @@
 
     <h1>Bem vindo <span th:text="${avaliador.nome}">Seu Nome Aqui</span>!</h1>
 
-    <span th:if="${avaliador.areaHumanas}">Área de conhecimento: Humanas</span>
-    <span th:if="${avaliador.areaExatas}">Área de conhecimento: Exatas</span>
+    <span th:if="${avaliador.areaHumanas}">Área de conhecimento: Humanas <a th:href="@{/revisao/listar.html(area=${0})}"><button>Listar</button></a></span>
+    <span th:if="${avaliador.areaExatas}">Área de conhecimento: Exatas <a th:href="@{/revisao/listar.html(area=${1})}"><button>Listar</button></a></span>
 
     <ul>
         <li><a th:href="@{/index.html}">Sair</a></li>

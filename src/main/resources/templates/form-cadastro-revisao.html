@@ -3,14 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Cadastro do Avaliador</title>
+    <title>Cadastro da Revisão</title>
 </head>
 
 <body>
 
     <h1>Cadastro da Revisão</h1>
 
-    <form th:action="@{/revisao/cadastrar.html(idTrabalho=${idTrabalho})}" th:object="${revisao}" method="POST">
+    Título do Trabalho: <span th:text="${trabalho.titulo}">...</span>
+    </br>
+    Descrição: <span th:text="${trabalho.descricao}">...</span>
+    </br>
+    <th:block th:switch="${trabalho.areaConhecimento}">
+        <span th:case="'0'">Área: Exatas</span>
+        <span th:case="'1'">Área: Humanas</span>
+    </th>
+
+    <br/>
+    <br/>
+    <br/>
+
+    <form th:action="@{/revisao/cadastrar.html(idTrabalho=${trabalho.id})}" th:object="${revisao}" method="POST">
         <table>
             <tr>
                 <td><label>Descrição: <input type="text" th:field="*{descricao}" /></label></td>

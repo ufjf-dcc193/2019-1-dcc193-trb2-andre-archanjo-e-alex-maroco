@@ -32,7 +32,8 @@ public class RevisaoController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("revisao", new Revisao());
         System.err.println(id);
-        mv.addObject("idTrabalho", id);
+        Trabalho tr = tRepo.findById(id).get();
+        mv.addObject("trabalho", tr);
         mv.setViewName("form-cadastro-revisao");
         return mv;
     }
@@ -59,5 +60,18 @@ public class RevisaoController {
             mv.setViewName("redirect:/index.html");
             return mv;
     }
+
+    /*@GetMapping(value={"/listarArea.html"})
+    public ModelAndView listarArea(@RequestParam int area) {
+        ModelAndView mv = new ModelAndView();
+        List<Trabalho> tr = tRepo.findAllByAreaConhecimento(area);
+        for (Trabalho t : tr) {
+            System.err.println(t.toString());
+        }
+        mv.addObject("trabalhos", tr);
+        mv.addObject("area", area);
+        mv.setViewName("list-trabalhos-area");
+        return mv;
+    }*/
 
 }
