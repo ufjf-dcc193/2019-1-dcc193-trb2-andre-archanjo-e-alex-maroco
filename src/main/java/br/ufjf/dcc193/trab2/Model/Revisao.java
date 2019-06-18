@@ -99,8 +99,13 @@ public class Revisao {
 
     @Override
     public String toString() {
-        return "Revisao [descricao=" + descricao + ", id=" + id + ", nota=" + nota
-                + ", status=" + status  + "]";
+        String s = "Revisao [descricao=" + descricao + ", id=" + id + ", nota=" + nota
+        + ", status=" + status  + ", id_avaliador=";
+        if(avaliador != null) s = s +  avaliador.getId() + ", id_trabalho=";
+        else s = s +  "null" + ", id_trabalho=";
+        if(trabalho != null) s = s +  trabalho.getId() + "]";
+        else s = s +  "null" + "]";
+        return s;
     }
 
     
