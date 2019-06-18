@@ -36,7 +36,7 @@ public class Trabalho {
     private int areaConhecimento;
 
     @OneToMany(mappedBy ="trabalho", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Revisao> listRevisao;
+    private List<Revisao> listRevisaoTrabalho;
 
     public Trabalho() {
     }
@@ -81,27 +81,28 @@ public class Trabalho {
         this.areaConhecimento = areaConhecimento;
     }
 
-    public List<Revisao> getListRevisao() {
-        return listRevisao;
+    public List<Revisao> getListRevisaoTrabalho() {
+        return listRevisaoTrabalho;
     }
 
-    public void setListRevisao(List<Revisao> listRevisao) {
-        this.listRevisao = listRevisao;
+    public void setListRevisaoTrabalho(List<Revisao> listRevisaoTrabalho) {
+        this.listRevisaoTrabalho = listRevisaoTrabalho;
     }
 
     public void addRevisao(Revisao revisao){
-        this.listRevisao.add(revisao);
+        this.listRevisaoTrabalho.add(revisao);
     }
 
     public void removeRevisao(Revisao revisao){
-        this.listRevisao.remove(revisao);
+        this.listRevisaoTrabalho.remove(revisao);
     }
 
     @Override
     public String toString() {
         return "Trabalho [areaConhecimento=" + areaConhecimento + ", descricao=" + descricao + ", id=" + id
-                + ", listRevisao=" + listRevisao + ", titulo=" + titulo + ", url=" + url + "]";
+                + ", listRevisao=" + listRevisaoTrabalho + ", titulo=" + titulo + ", url=" + url + "]";
     }
+
 
     
 

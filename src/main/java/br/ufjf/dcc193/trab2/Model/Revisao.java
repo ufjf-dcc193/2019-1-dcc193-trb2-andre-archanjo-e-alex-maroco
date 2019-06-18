@@ -1,5 +1,6 @@
 package br.ufjf.dcc193.trab2.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -31,11 +32,11 @@ public class Revisao {
     private int status;
 
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name="avaliador_id")
     private Avaliador avaliador;
     
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name="trabalho_id")
     private Trabalho trabalho;
 
     public Revisao() {
@@ -73,9 +74,33 @@ public class Revisao {
         this.status = status;
     }
 
+    /*
     @Override
     public String toString() {
         return "Revisao [descricao=" + descricao + ", id=" + id + ", nota=" + nota + ", status=" + status + "]";
+    }
+    */
+
+    public Avaliador getAvaliador() {
+        return avaliador;
+    }
+
+    public void setAvaliador(Avaliador avaliador) {
+        this.avaliador = avaliador;
+    }
+
+    public Trabalho getTrabalho() {
+        return trabalho;
+    }
+
+    public void setTrabalho(Trabalho trabalho) {
+        this.trabalho = trabalho;
+    }
+
+    @Override
+    public String toString() {
+        return "Revisao [descricao=" + descricao + ", id=" + id + ", nota=" + nota
+                + ", status=" + status  + "]";
     }
 
     

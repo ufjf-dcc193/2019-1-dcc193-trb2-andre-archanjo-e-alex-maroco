@@ -41,7 +41,7 @@ public class Avaliador {
     private boolean areaHumanas;
 
     @OneToMany(mappedBy ="avaliador", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Revisao> listRevisao;
+    private List<Revisao> listRevisaoAvaliador;
 
     public Avaliador() {
     }
@@ -80,12 +80,12 @@ public class Avaliador {
         this.codigoAcesso = codigoAcesso;
     }
 
-    public List<Revisao> getListRevisao() {
-        return listRevisao;
+    public List<Revisao> getListRevisaoAvaliador() {
+        return listRevisaoAvaliador;
     }
 
-    public void setListRevisao(List<Revisao> listRevisao) {
-        this.listRevisao = listRevisao;
+    public void setListRevisaoAvaliador(List<Revisao> listRevisaoAvaliador) {
+        this.listRevisaoAvaliador = listRevisaoAvaliador;
     }
 
     public boolean isAreaExatas() {
@@ -107,16 +107,18 @@ public class Avaliador {
     @Override
     public String toString() {
         return "Avaliador [areaExatas=" + areaExatas + ", areaHumanas=" + areaHumanas + ", codigoAcesso=" + codigoAcesso
-                + ", email=" + email + ", id=" + id + ", listRevisao=" + listRevisao + ", nome=" + nome + "]";
+                + ", email=" + email + ", id=" + id + ", listRevisao=" + listRevisaoAvaliador + ", nome=" + nome + "]";
     }
 
     public void addRevisao(Revisao revisao){
-        this.listRevisao.add(revisao);
+        this.listRevisaoAvaliador.add(revisao);
     }
 
     public void removeRevisao(Revisao revisao){
-        this.listRevisao.remove(revisao);
+        this.listRevisaoAvaliador.remove(revisao);
     }
+
+    
 
     
     

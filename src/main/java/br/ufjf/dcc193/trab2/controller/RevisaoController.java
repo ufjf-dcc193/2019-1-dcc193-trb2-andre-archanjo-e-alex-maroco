@@ -12,14 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.ufjf.dcc193.trab2.model.Avaliador;
 import br.ufjf.dcc193.trab2.model.Revisao;
 import br.ufjf.dcc193.trab2.model.Trabalho;
+import br.ufjf.dcc193.trab2.repository.AvaliadorRepository;
 import br.ufjf.dcc193.trab2.repository.RevisaoRepository;
 import br.ufjf.dcc193.trab2.repository.TrabalhoRepository;
+import br.ufjf.dcc193.trab2.service.LoginService;
 
 @Controller
 @RequestMapping("/revisao")
 public class RevisaoController {
+
+    @Autowired
+    LoginService ls;
+
+    @Autowired
+    AvaliadorRepository aRepo;
 
     @Autowired
     TrabalhoRepository tRepo;
@@ -30,8 +39,15 @@ public class RevisaoController {
     @GetMapping("/cadastrar.html")
     public ModelAndView cadastroRevisao(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
+
+        System.err.println(System.lineSeparator());
+        System.err.println(aRepo.findAll());
+        System.err.println(System.lineSeparator());
+        System.err.println(tRepo.findAll());
+        System.err.println(System.lineSeparator());
+        System.err.println(rRepo.findAll());
         mv.addObject("revisao", new Revisao());
-        System.err.println(id);
+        //System.err.println(id);
         Trabalho tr = tRepo.findById(id).get();
         mv.addObject("trabalho", tr);
         mv.setViewName("form-cadastro-revisao");
@@ -47,16 +63,38 @@ public class RevisaoController {
                 mv.addObject("idTrabalho", idTrabalho);
                 return mv;
             }
-            rRepo.save(revisao);
-            System.err.println(revisao.toString());
+            Boolean isNew = false;
+            if(revisao.getId() == null) {
+                isNew = true;
+            }
+            Avaliador a = ls.getUser();
             Trabalho tr = tRepo.findById(idTrabalho).get();
-            System.err.println(tr.toString());
-            tr.addRevisao(revisao);
+            revisao.setAvaliador(a);
+            revisao.setTrabalho(tr);
+            rRepo.save(revisao);
+            if(isNew) {
+                a.getListRevisaoAvaliador().add(revisao);
+                tr.getListRevisaoTrabalho().add(revisao);
+                a = aRepo.save(a);
+                //System.err.println(a);
+                tRepo.save(tr);
+                ls.login(a);
+            }
+            //tRepo.save(tr);
+            //rRepo.save(revisao);
+            //revisao.setAvaliador(a);
+            //revisao.setTrabalho(tr);
+            //rRepo.save(revisao);
+            //System.err.println(revisao.toString());
+            //System.err.println(tr.toString());
+            //tr.addRevisao(revisao);
             // tr.setTitulo(trabalho.getTitulo());
             // tr.setDescricao(trabalho.getDescricao());
             // tr.setUrl(trabalho.getUrl());
             // tr.setAreaConhecimento(trabalho.getAreaConhecimento());
-            tRepo.save(tr);
+            //tRepo.save(tr);
+
+            
             mv.setViewName("redirect:/index.html");
             return mv;
     }
