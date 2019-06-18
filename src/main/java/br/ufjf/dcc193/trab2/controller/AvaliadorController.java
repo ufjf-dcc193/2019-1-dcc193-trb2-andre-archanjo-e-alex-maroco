@@ -56,12 +56,20 @@ public class AvaliadorController {
             return mv;
     }
 
+    @GetMapping(value={"/logout.html" })
+    public ModelAndView logout() {
+        ModelAndView mv = new ModelAndView();
+        ls.logout();
+        mv.setViewName("redirect:/index.html");
+        return mv;
+    }
+
     @GetMapping(value={"/avaliador/home.html"})
     public ModelAndView home() {
         ModelAndView mv = new ModelAndView();
         Avaliador a = ls.getUser();
         mv.addObject("avaliador", a);
-        mv.setViewName("avaliador-logado");
+        mv.setViewName("avaliador-home");
         return mv;
     }
 
