@@ -9,7 +9,8 @@
     <h1>Trabalho 2</h1>
     <h1>Avaliador logado: <span th:text=${username}></span></h1>
     <ul>
-        <li><a th:href="@{/login.html}">Login Avaliador</a></li>
+        <li th:if="${!loggedIn}"><a th:href="@{/login.html}">Login Avaliador</a></li>
+        <li th:if="${loggedIn}"><a th:href="@{/avaliador/home.html}">Página do avaliador</a></li>
         <li><a th:href="@{/avaliador/cadastro.html}">Cadastro do Avaliador</a></li>
         <li><a th:href="@{/trabalho/cadastro.html}">Cadastro de Trabalho</a></li>
         <li><a th:href="@{/avaliador/listar.html}">Listar todos os Avaliadores</a></li>

@@ -25,8 +25,10 @@ public class HomeController {
         Avaliador a = ls.getUser();
         if(a != null) {
             mv.addObject("username", a.getNome());
+            mv.addObject("loggedIn", true);
         } else {
-            mv.addObject("username", "Sem user");
+            mv.addObject("username", "-");
+            mv.addObject("loggedIn", false);
         }
         return mv;
     }
