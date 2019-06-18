@@ -40,7 +40,7 @@ public class Avaliador {
 
     private boolean areaHumanas;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy ="avaliador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Revisao> listRevisao;
 
     public Avaliador() {

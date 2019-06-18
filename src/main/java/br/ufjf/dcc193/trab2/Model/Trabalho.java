@@ -35,7 +35,7 @@ public class Trabalho {
     @NotNull(message = "Selecione uma área de conhecimento")
     private int areaConhecimento;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy ="trabalho", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Revisao> listRevisao;
 
     public Trabalho() {
