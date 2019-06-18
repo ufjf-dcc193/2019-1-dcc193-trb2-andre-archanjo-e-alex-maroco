@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
@@ -27,6 +29,14 @@ public class Revisao {
     @Min(value = 0, message = "O valor mínimo é 0")
     @Max(value = 4, message = "O valor máximo é 4")
     private int status;
+
+    @ManyToOne
+    @JoinColumn
+    private Avaliador avaliador;
+    
+    @ManyToOne
+    @JoinColumn
+    private Trabalho trabalho;
 
     public Revisao() {
     }
