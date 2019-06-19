@@ -85,6 +85,11 @@ public class RevisaoController {
             System.err.println(val);
             revisao.setStatus(val);
 
+            if(val == 2){
+                revisao.setNota(0);
+                revisao.setDescricao("");
+            }
+
             System.err.println(revisao.toString());
             rRepo.save(revisao);
             if(isNew) {
