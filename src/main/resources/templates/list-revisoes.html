@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de revisões</title>
+</head>
+
+<body>
+
+    <h1>Lista de revisões</h1>
+
+    <table border="1">
+        <tr> 
+            <th>Id</th>
+            <th>Avaliador</th>
+            <th>Trabalho</th>
+            <th>Descrição</th>
+            <th>Nota</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="revisao : ${revisoes}">
+                <td th:text="${revisao.id}">...</td>
+                <td th:text="${revisao.avaliador.nome}">...</td>
+                <td th:text="${revisao.trabalho.titulo}">...</td>
+                <td th:text="${revisao.descricao}">...</td>
+                <td th:text="${revisao.nota}">...</td>
+                <td th:switch="${revisao.status}">
+                    <span th:case="'0'">A fazer</span>
+                    <span th:case="'1'">Avaliado</span>
+                    <span th:case="'2'">Impedido</span>
+                    <span th:case="'3'">Validado</span>
+                    <span th:case="'4'">Invalidado</span>
+                </td>
+        </tr>
+    </table>
+    <p><button><a th:href="@{/index.html}">Voltar</a></button></p>
+</body>
+</html>

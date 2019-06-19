@@ -1,6 +1,7 @@
 package br.ufjf.dcc193.trab2.controller;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -100,35 +101,36 @@ public class RevisaoController {
                 tRepo.save(tr);
                 ls.login(a);
             }
-            //tRepo.save(tr);
-            //rRepo.save(revisao);
-            //revisao.setAvaliador(a);
-            //revisao.setTrabalho(tr);
-            //rRepo.save(revisao);
-            //System.err.println(revisao.toString());
-            //System.err.println(tr.toString());
-            //tr.addRevisao(revisao);
-            // tr.setTitulo(trabalho.getTitulo());
-            // tr.setDescricao(trabalho.getDescricao());
-            // tr.setUrl(trabalho.getUrl());
-            // tr.setAreaConhecimento(trabalho.getAreaConhecimento());
-            //tRepo.save(tr);
-            
             mv.setViewName("redirect:/index.html");
             return mv;
     }
 
-    /*@GetMapping(value={"/listarArea.html"})
-    public ModelAndView listarArea(@RequestParam int area) {
+    @GetMapping(value={"/avaliadas.html"})
+    public ModelAndView listarAvaliadasPorAvaliador() {
         ModelAndView mv = new ModelAndView();
-        List<Trabalho> tr = tRepo.findAllByAreaConhecimento(area);
-        for (Trabalho t : tr) {
-            System.err.println(t.toString());
-        }
-        mv.addObject("trabalhos", tr);
-        mv.addObject("area", area);
-        mv.setViewName("list-trabalhos-area");
+        List<Avaliador> avaliadores = aRepo.findAll();
+        mv.addObject("avaliadores", avaliadores);
+        mv.setViewName("list-revisao-por-avaliador");
         return mv;
-    }*/
+    }
+
+    @GetMapping(value={"/listar.html"})
+    public ModelAndView listarTodas() {
+        ModelAndView mv = new ModelAndView();
+        List<Revisao> revisoes = rRepo.findAll();
+        mv.addObject("revisoes", revisoes);
+        mv.setViewName("list-revisoes");
+        return mv;
+    }
+
+    @RequestMapping(value={"/alterarStatus.html"})
+    public ModelAndView alterarStatus(@RequestParam Long id, @RequestParam int status) {
+        ModelAndView mv = new ModelAndView();
+        Revisao r = rRepo.findById(id).get();
+        r.setStatus(status);
+        rRepo.save(r);
+        mv.setViewName("list-revisao-por-avaliador");
+        return mv;
+    }
 
 }
