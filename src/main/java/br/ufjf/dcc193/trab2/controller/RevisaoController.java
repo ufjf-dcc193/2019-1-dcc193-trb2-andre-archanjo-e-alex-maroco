@@ -41,13 +41,14 @@ public class RevisaoController {
     @GetMapping("/cadastrar.html")
     public ModelAndView cadastroRevisao(@RequestParam Long id) {
         ModelAndView mv = new ModelAndView();
-
+        
         System.err.println(System.lineSeparator());
         System.err.println(aRepo.findAll());
         System.err.println(System.lineSeparator());
         System.err.println(tRepo.findAll());
         System.err.println(System.lineSeparator());
         System.err.println(rRepo.findAll());
+        
         mv.addObject("revisao", new Revisao());
         //System.err.println(id);
         Trabalho tr = tRepo.findById(id).get();
@@ -69,8 +70,9 @@ public class RevisaoController {
             if(revisao.getId() == null) {
                 isNew = true;
             }
-            Avaliador a = ls.getUser();
+            Avaliador a = aRepo.findById(ls.getUser().getId()).get();
             Trabalho tr = tRepo.findById(idTrabalho).get();
+            
             revisao.setAvaliador(a);
             revisao.setTrabalho(tr);
             System.err.println(buttonName);
@@ -106,7 +108,6 @@ public class RevisaoController {
             // tr.setUrl(trabalho.getUrl());
             // tr.setAreaConhecimento(trabalho.getAreaConhecimento());
             //tRepo.save(tr);
-
             
             mv.setViewName("redirect:/index.html");
             return mv;

@@ -32,11 +32,11 @@ public class Revisao {
     private int status;
 
     @ManyToOne
-    @JoinColumn(name="avaliador_id")
+    @JoinColumn(name="avaliador_id", referencedColumnName = "id", nullable = false)
     private Avaliador avaliador;
     
     @ManyToOne
-    @JoinColumn(name="trabalho_id")
+    @JoinColumn(name="trabalho_id", referencedColumnName = "id", nullable = false)
     private Trabalho trabalho;
 
     public Revisao() {
