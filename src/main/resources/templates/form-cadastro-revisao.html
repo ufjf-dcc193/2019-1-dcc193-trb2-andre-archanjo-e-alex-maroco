@@ -33,8 +33,13 @@
                 <td><strong th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}"></strong></td>
             </tr>
             <tr>
-                <td><input type="submit"/></td>
-                <td><input type="reset"/></td>
+                <td><input type="submit" name="buttonName" value="Revisar Depois"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="buttonName" value="Revisar Agora"/></td>
+            </tr>
+            <tr>
+                <td><input type="submit" name="buttonName" value="Pular"/></td>
             </tr>
         </table>
     </form>

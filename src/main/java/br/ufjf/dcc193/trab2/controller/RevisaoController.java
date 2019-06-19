@@ -1,5 +1,7 @@
 package br.ufjf.dcc193.trab2.controller;
 
+import java.util.HashMap;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -55,7 +57,7 @@ public class RevisaoController {
     }
 
     @PostMapping(value={"/cadastrar.html" })
-    public ModelAndView cadastroRevisao(@Valid Revisao revisao, @RequestParam Long idTrabalho, BindingResult binding) {
+    public ModelAndView cadastroRevisao(@Valid Revisao revisao, @RequestParam Long idTrabalho, @RequestParam String buttonName, BindingResult binding) {
         ModelAndView mv = new ModelAndView();
             if(binding.hasErrors()){
                 mv.setViewName("form-cadastro-revisao");
@@ -71,6 +73,17 @@ public class RevisaoController {
             Trabalho tr = tRepo.findById(idTrabalho).get();
             revisao.setAvaliador(a);
             revisao.setTrabalho(tr);
+            System.err.println(buttonName);
+            HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
+            hashMap.put("Revisar Depois", 0);
+            hashMap.put("Revisar Agora", 1);
+            hashMap.put("Pular", 2);
+            
+            Integer val = (Integer)hashMap.get(buttonName);
+            System.err.println(val);
+            revisao.setStatus(val);
+
+            System.err.println(revisao.toString());
             rRepo.save(revisao);
             if(isNew) {
                 a.getListRevisaoAvaliador().add(revisao);
