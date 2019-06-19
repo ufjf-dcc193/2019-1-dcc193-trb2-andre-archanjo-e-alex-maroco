@@ -123,7 +123,7 @@ public class AvaliadorController {
                 return mv;
             }
             Avaliador av = aRepo.getOne(avaliador.getId());
-            String[] ignorar = {"id", "listRevisao"};
+            String[] ignorar = {"id", "listRevisaoAvaliador"};
             BeanUtils.copyProperties(avaliador, av, ignorar);
             // av.setNome(avaliador.getNome());
             // av.setEmail(avaliador.getEmail());

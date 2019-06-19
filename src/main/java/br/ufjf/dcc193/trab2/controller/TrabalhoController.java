@@ -85,7 +85,7 @@ public class TrabalhoController {
                 return mv;
             }
             Trabalho tr = tRepo.getOne(trabalho.getId());
-            String[] ignorar = {"id", "revisao"};
+            String[] ignorar = {"id", "listRevisaoTrabalho"};
             BeanUtils.copyProperties(trabalho, tr, ignorar);
             // tr.setTitulo(trabalho.getTitulo());
             // tr.setDescricao(trabalho.getDescricao());
